@@ -1,562 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>PLAY BACK — Australian TV Game Shows</title>
-
-    <link rel="stylesheet" href="assets/css/reset.css">
-    <link rel="stylesheet" href="assets/css/styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PLAYBACK — Australian TV Game Shows</title>
+  <link rel="stylesheet" href="assets/css/reset.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
 </head>
-
 <body>
+  <header class="site-header">
+    <a href="index.html" class="site-logo">PLAY BACK</a>
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="#about">ABOUT</a>
+    </nav>
+  </header>
 
-<!-- NAV -->
+  <!-- Stripe colours live in styles.css (--rainbow-1 to --rainbow-5) -->
+  <svg class="header-accent" viewBox="0 0 1400 60" preserveAspectRatio="none" aria-hidden="true">
+    <rect x="0" y="0"  width="1400" height="12"/>
+    <rect x="0" y="12" width="1400" height="12"/>
+    <rect x="0" y="24" width="1400" height="12"/>
+    <rect x="0" y="36" width="1400" height="12"/>
+    <rect x="0" y="48" width="1400" height="12"/>
+  </svg>
 
-    <header class="site-header">
-        <a href="index.html" class="site-logo">PLAY BACK</a>
+  <main>
+    <section class="intro" aria-labelledby="page-title">
+      <div class="intro-content">
+        <h1 id="page-title">Australian TV<br>Game Shows</h1>
+        <p class="intro-text">
+          Explore Australian television game shows from the 1950s to now,
+          through archival footage and stories from the NFSA collection.
+        </p>
 
-        <nav class="site-nav" aria-label="Main navigation">
-            <a href="#about">ABOUT</a>
-        </nav>
-    </header>
-
-    
-
-<svg class="header-accent" viewBox="0 0 1400 60" preserveAspectRatio="none" aria-hidden="true">
-        <rect x="0" y="0"  width="1400" height="12" fill="#da5161"/>
-        <rect x="0" y="12"  width="1400" height="12" fill="#e59011"/>
-        <rect x="0" y="24" width="1400" height="12" fill="#5b820e"/>
-        <rect x="0" y="36" width="1400" height="12" fill="#38a6a3"/>
-        <rect x="0" y="48" width="1400" height="12" fill="#a12b99"/>
-    </svg>
-    
-
-    <main>
-
-<!-- HERO/INTRODUCTION -->
-
-        <section class="intro" aria-labelledby="page-title">
-
-  
-            <div class="intro-content">
-            <p class="eyebrow">NATIONAL FILM AND SOUND ARCHIVE</p>
-
-            <h1 id="page-title">Australian TV<br>Game Shows
-            </h1>
-
-            <p class="intro-text">
-                Explore Australian television game shows from the 1950s to now,
-                through archival footage and stories from the NFSA collection.
-            </p>
-
-        <!--API: TOTAL COUNTS WILL BE CALCULATED DYNAMICALLY FROM DATA RETURNED BY THE API-->
-
-             <div class="decade-stats" id="decade-stats">
-                <div class="stat-item">
-                    <span class="stat-number">200+</span>
-                    <span class="stat-label">Shows Archived</span>
-                </div>
-
-                <div class="stat-divider-line"></div>
-
-                <div class="stat-item">
-                    <span class="stat-number">5</span>
-                    <span class="stat-label">Genres</span>
-                </div>
-                </div>
-            </div>
-
-    
-        </section>
-
-  
-
-<!-- TIMELINE -->
-<!--API: COULD BE GENERATED FROM LIST OF DECADES IN THE DATA RATHER THAN HARDCODED.
-    REPEATED COMONENT: one <button class="timeline-item"> PER DECADE-->
- 
-        <section class="timeline-section" aria-label="Browse by decade">
-
-           <div class="timeline-scroll">
-            <div class="timeline">
-                <button class="timeline-item active" data-decade="1950s">
-                     <span class="timeline-label">1950s</span>
-                     <span class="timeline-dot"></span>
-                </button>
-
-                 <button class="timeline-item" data-decade="1960s">
-                    <span class="timeline-label">1960s</span>
-                    <span class="timeline-dot"></span>
-                 </button>
-    
-                 <button class="timeline-item" data-decade="1970s">
-                    <span class="timeline-label">1970s</span>
-                    <span class="timeline-dot"></span>
-                </button>
-   
-                <button class="timeline-item" data-decade="1980s">
-                     <span class="timeline-label">1980s</span>
-                     <span class="timeline-dot"></span>
-                </button>
-   
-                <button class="timeline-item" data-decade="1990s">
-                    <span class="timeline-label">1990s</span>
-                    <span class="timeline-dot"></span>
-                </button>
-    
-                <button class="timeline-item" data-decade="2000s">
-                    <span class="timeline-label">2000s</span>
-                    <span class="timeline-dot"></span>
-                </button>
-    
-                <button class="timeline-item" data-decade="2010s">
-                    <span class="timeline-label">2010s</span>
-                    <span class="timeline-dot"></span>
-                </button>
-    
-                <button class="timeline-item" data-decade="now">
-                    <span class="timeline-label">NOW</span>
-                    <span class="timeline-dot"></span>
-                </button>
-            </div>
+        <div class="decade-stats" id="decade-stats">
+          <div class="stat-item">
+            <span class="stat-number" id="show-count">—</span>
+            <span class="stat-label">Shows Displayed</span>
+          </div>
+          <div class="stat-divider-line"></div>
+          <div class="stat-item">
+            <span class="stat-number" id="record-count">—</span>
+            <span class="stat-label">Archival Records</span>
+          </div>
         </div>
-
-<!-- CATEGORY FILTERS -->
- <!--API: GENRES COULD BE GENERATED FROM GENRES IN DATASET
-    REPEATED COMPONENT: ONE <button class="filter-chip"> 
-    per genre using data to match each show genre field-->
-
-        <div class="decade-filters">
-            <span class="filter-label">Filter by genre:</span>
-                <button class="filter-chip" type="button" data-genre="all">All</button>
-                <button class="filter-chip active" type="button" data-genre="quiz">Quiz & Trivia</button>
-                <button class="filter-chip" type="button" data-genre="dating">Dating & Relationships</button>
-                <button class="filter-chip" type="button" data-genre="physical">Physical & Action</button>
-                <button class="filter-chip" type="button" data-genre="panel">Panel & Bluffing</button>
-                <button class="filter-chip" type="button" data-genre="racing">Consumer Racing</button>
-   
-        <a href="#" class="discover-button">
-            <span class="discover-icon">⟳</span>
-                Surprise me
-            </a>
-        </div>
-  </section>
-        
-<!-- SELECTED DECADE -->
-<!--API: HEADING + DESCRIPTION TEXT WILL UPDATE DYNAMICALLY 
-    BASED ON SELECTED DECADE PULLED FROM DECADE METADATA END POINT-->
-
-        <section class="decade-section" aria-labelledby="decade-title">
-            
-            <div class="decade-heading">
-                <p class="eyebrow">THE ARCHIVE</p>
-                <h2 id="decade-title">1950s</h2>
-                <p class="decade-description" id="decade-description">
-                    The beginning of Australian television and the first generation
-                    of local game and quiz shows.
-                </p>
-            </div>
-
-<!-- CONTENT CARDS -->
-<!--API: GRID WILL BE POPULATED DYNAMICALLY FROM A /SHOWS ENDPOINT,
-    FILTERED BY THE SELECTED DECADE + GENRE.
-    REPEATED COMONENT: ONE <article class="show-card"> PER SHOW RECORD.
-    EXPECTED FIELDS PER SHOW: TITLE, YEAR, GENRE, DESCRIPTION, IMAGE_URL, VIDEO_URL-->
-            <div class="show-grid" id="show-grid">
-
-<!-- CARD 1 -->
-<!--TEMPLATE: FIELDS BELOW (IMG SRC/ALT, YEAR, TITLE, GENRE,
-    DESCRIPTION, PLAY BUTTON DATA ATTRIBUTES ARE ALL API DRIVEN 
-    PER SHOW RECORD.)-->
-
-                <article class="show-card">
-                    <div class="show-image">
-                        <img
-                            src="assets/images/pressure-pak-show.jpg"
-                            alt="The Pressure Pak Show, Australian television game show"
-                        >
-<!-- YEAR -->
-                        <span class="show-year">1957</span>
-                        <button 
-                            class="play-button" 
-                            type="button"
-                            aria-label="Play The Pressure Pak Show"
-                            data-title="The Pressure Pak Show"
-                            data-year="1957"
-                            data-description="A 1957 Australian television show hosted by Jack Davey, where contestants guessed phrases from a series of clues"
-                        >
-                            <span>▶</span>
-                        </button>
-                    </div>
-
-                    <div class="show-content">
-<!-- GENRE/META -->
-                        <p class="show-meta" data-genre="quiz">Quiz & Trivia</p>
-                        
-                        
-<!-- TITLE -->
-                        <h3>The Pressure Pak Show</h3>
-<!-- DESCRIPTION -->
-                        <p>
-                        A 1957 quiz show hosted by Jack Davey, where contestants guessed phrases from a series of clues
-                        </p>
-
-                    </div>
-                </article>
-
-
-<!-- CARD 2 -->
-
-                <article class="show-card">
-
-                    <div class="show-image">
-
-                        <img
-                            src="assets/images/ask-me-another.jpg"
-                            alt="Ask Me Another"
-                        >
-<!-- YEAR -->
-                        <span class="show-year">1953</span>
-                        <button 
-                            class="play-button" 
-                            type="button"
-                            aria-label="Play Ask Me Another"
-                            data-title="Ask Me Another"
-                            data-year="1953"
-                            data-description="A publicly unseen pilot hosted by radio star Jack Davey — possibly Australia's very first television game show, filmed three years before TV officially launched."
-                        >
-                            <span>▶</span>
-                        </button>
-                    </div>
-
-                    <div class="show-content">
-<!-- GENRE/META -->
-                         <p class="show-meta" data-genre="quiz">Quiz & Trivia</p>
-                        
-<!-- TITLE -->            
-                        <h3>Ask Me Another</h3>
-<!-- DESCRIPTION -->
-                        <p>
-                            A publicly unseen pilot hosted by radio star Jack Davey — possibly Australia's very first television game show, filmed three years before TV officially launched.
-                        </p>
-
-                    </div>
-                </article>
-
-
-<!-- CARD 3 -->
-
-                <article class="show-card">
-                    <div class="show-image">
-
-                        <img
-                            src="assets/images/pick-a-box.jpg"
-                            alt="Pick a Box"
-                        >
-<!-- YEAR -->
-                        <span class="show-year">1957</span>
-                        <button 
-                        class="play-button" 
-                        type="button"
-                        aria-label="Pick a Box"
-                        data-title="Pick a Box"
-                        data-year="1957"
-                        data-description="Husband-and-wife duo Bob and Dolly Dyer hosted this beloved quiz, where contestants could win — or lose — a mystery prize hidden in a box."
-                        >
-                            <span>▶</span>
-                        </button>
-                    </div>
-
-                    <div class="show-content">
-
-<!-- GENRE/META -->
-                         <p class="show-meta" data-genre="quiz">Quiz & Trivia</p>
-                        
-<!-- TITLE -->
-                        <h3>Pick a Box</h3>
-<!-- DESCRIPTION -->
-                        <p>
-                            Husband-and-wife duo Bob and Dolly Dyer hosted this beloved quiz, where contestants could win — or lose — a mystery prize hidden in a box.
-                        </p>
-
-                    </div>
-                </article>
-
-
-<!-- CARD 4 -->
-
-                <article class="show-card">
-                    <div class="show-image">
-
-                        <img
-                            src="assets/images/wheel-of-fortune.jpg"
-                            alt="Wheel of Fortune"
-                        >
-<!-- YEAR -->
-                        <span class="show-year">1959</span>
-                        <button 
-                        class="play-button" 
-                        type="button"
-                        aria-label="Wheel of Fortune"
-                        data-title="Wheel of Fortune"
-                        data-year="1959"
-                        data-description="An early quiz show from producer Reg Grundy, continuing the trend of radio-turned-television game formats in the late 1950s."
-                        >
-                            <span>▶</span>
-                        </button>
-                    </div>
-
-                    <div class="show-content">
-
-<!-- GENRE/META -->
-                         <p class="show-meta" data-genre="quiz">Quiz & Trivia</p>
-                        
-<!-- TITLE -->
-                        <h3>Wheel of Fortune</h3>
-<!-- DESCRIPTION -->
-                        <p>
-                            An early quiz show from producer Reg Grundy, continuing the trend of radio-turned-television game formats in the late 1950s.
-                        </p>
-
-                    </div>
-                </article>
-
-
-<!-- CARD 5 -->
-
-                <article class="show-card">
-                    <div class="show-image">
-
-                        <img
-                            src="assets/images/name-that-tune.jpg"
-                            alt="Name That Tune"
-                        >
-
-<!-- YEAR -->
-                        <span class="show-year">1957</span>
-
-                        <button class="play-button" 
-                        type="button"
-                        aria-label="Play Name That Tune"
-                        data-title="Name That Tune"
-                        data-year="1957"
-                        data-description="A 1957 Australian television game show featuring music, questions and contestants."
-                        >
-                            <span>▶</span>
-                        </button>
-
-                    </div>
-
-                    <div class="show-content">
-
-<!-- GENRE/META -->
-
-                         <p class="show-meta" data-genre="quiz">Quiz & Trivia</p>
-<!-- TITLE -->
-                        <h3>Name That Tune</h3>
-<!-- DESCRIPTION -->
-                        <p>
-                            A 1957 Australian television game show featuring music, questions and contestants.
-                        </p>
-
-                    </div>
-                </article>
-                </div>
-        </section>
-
-<!-- STATE: LOADING (not rendered as i have no JS to trigger this)
- SHOWN WHEN A SHOW REQUEST TO THE API IN ACTION, BEFORE API RETURN.
- REPEATED COMPONENT: ONE SKELETON "show-card" PER EXPECTED RESULT.
-   
-            <section class="decade-section" aria-label="Loading state example">
-                <div class="decade-heading">
-                <p class="eyebrow">THE ARCHIVE</p>
-                <h2>Loading…</h2>
-            </div>
-    
-            <div class="show-grid">
-             <article class="show-card show-card--skeleton">
-                <div class="skeleton-block"></div>
-
-                <div class="show-content">
-                <div class="skeleton-line skeleton-line--tag"></div>
-                <div class="skeleton-line skeleton-line--title"></div>
-                <div class="skeleton-line skeleton-line--text"></div>
-                <div class="skeleton-line skeleton-line--text short"></div>
-            </div>
-        </article>
-
-             <article class="show-card show-card--skeleton">
-                <div class="skeleton-block"></div>
-                <div class="show-content">
-                <div class="skeleton-line skeleton-line--tag"></div>
-                <div class="skeleton-line skeleton-line--title"></div>
-                <div class="skeleton-line skeleton-line--text"></div>
-                <div class="skeleton-line skeleton-line--text short"></div>
-            </div>
-        </article>
-    </div>
-</section>
--->
-
-<!-- STATE: EMPTY (not rendered as no JS to trigger this)
-     SHOWN WHEN A GENRE/DECADE FILTER COMBINAITON RETURNS NO RESULTS 
-     FROM THE API. REPLACES SHOW-GRID CONTENT ENTIRELY.
-   
-        <section class="decade-section" aria-label="Empty state example">
-         <div class="decade-heading">
-        <p class="eyebrow">THE ARCHIVE</p>
-        <h2>No Results</h2>
-        </div>
-
-        <div class="show-grid">
-        <div class="state-message state-message--empty">
-            <p class="state-message-title">Nothing here yet</p>
-            <p class="state-message-text">
-                We don't have any items for this decade right now.
-            </p>
-        </div>
-    </div>
-</section>
--->
-
-
-<!-- STATE: ERROR (not rendered as no JS to trigger this)
-     SHOWN IF API RESULTS FAIL. INCLUDES TRY AGAIN ACTION FOR USER.
-
-    <section class="decade-section" aria-label="Error state example">
-    <div class="decade-heading">
-        <p class="eyebrow">THE ARCHIVE</p>
-        <h2>Something Went Wrong</h2>
-        </div>
-
-        <div class="show-grid">
-        <div class="state-message state-message--error">
-            <p class="state-message-title">Couldn't load this decade</p>
-            <p class="state-message-text">
-                Something went wrong reaching the archive. Check your connection and try again.
-            </p>
-            <button class="state-message-retry" type="button">Retry</button>
-            </div>
-        </div>
+      </div>
     </section>
--->
 
-<!-- ABOUT -->
-        <section id="about" class="about-section">
-            <div class="about-text">
-            <p class="eyebrow">ABOUT PLAY BACK</p>
-            <h2>Australian Game shows<br>through the archive.</h2>
-            <p>
-                PLAY BACK invites you to journey through the  
-                National Film and Sound Archive’s collection of
-                iconic Australian game shows by decade. Wonder through the decades, press play, and discover the games that had Australia watching.<br>
-                <br>
-                This project was produced by students in the Faculty of Arts & Design from the University of Canberra, 2026. 
-            </p>
-            </div>
+    <section class="timeline-section" aria-label="Browse Australian game shows by decade">
+      <div class="timeline-scroll">
+        <!-- Decade buttons are generated by script.js (DECADES) -->
+        <div class="timeline" id="timeline"></div>
+      </div>
+    </section>
 
-        </section>
-    </main>
+    <section class="decade-section" aria-labelledby="decade-title">
+      <div class="genre-filters" aria-label="Filter game shows by genre">
+        <span class="genre-filter-label">FILTER BY GENRE:</span>
+        <div class="genre-filter-buttons">
+          <button class="filter-chip active" type="button" data-genre="all">All</button>
+          <button class="filter-chip" type="button" data-genre="quiz">Quiz</button>
+          <button class="filter-chip" type="button" data-genre="dating">Dating</button>
+          <button class="filter-chip" type="button" data-genre="panel">Panel</button>
+          <button class="filter-chip" type="button" data-genre="physical">Physical</button>
+          <button class="filter-chip" type="button" data-genre="racing">Racing</button>
 
-<!-- FOOTER -->
-    <footer class="site-footer">
-        <p>PLAY BACK</p>
-        <p>NFSA</p>
-    </footer>
-
-<!-- VIDEO STATE -->
-<!--THIS OVERLAY CURRENTLY SHOWS STATIC PLACEHOLDER IN PLACE OF VIDEO -
-    IN A2 WILL EMBED NFSA ARCHIVE VIDEO SOURCED FROM EACH SHOW.
-    API: OVERLAY CONTENT (TITLE, DESCRIPTION, YEAR, RELATED SHOWS)
-    WILL POPULATE DYNAMICALLY BASED ON WHICH SHOWS PLAY BUTTON WAS 
-    CLICKED, USING ITS DATAATTRIBUTES/FETCHED SHOW DETAIL RECORD.-->
-
-    <aside class="video-overlay" aria-label="Show details" aria-hidden="true">
-
-        <div class="video-overlay-content">
-
-            <button 
-            class="video-close" 
-            type="button"
-            aria-label="close show details"
-            >
-            x
-        </button>
-
-        <div class="video-placeholder">
-            <div class="video-placeholder-play">
-                <span>▶</span>
-                </div>
-
-                <p>ARCHIVAL VIDEO</p>
-                </div>
-
-                <div class="video-details">
-                    <p class="show-meta">
-                        <span class="show-tag">GAME SHOW</span>
-                        <span class="show-source">/ NFSA</span>
-                        </p>
-
-    <h2>The Pressure Pak Show</h2>
-
-    <p>A 1957 Australian television quiz show hosted by Jack Davey, where contestants guessed phrases from a series of clues</p>
-
-    <div class="video-metadata">
-        <span>1957</span>
-        <span>TELEVISION</span>
-        <span>AUSTRALIA</span>
-    </div>
-
-    <!--API: RELATED ITEMS WILL BE DYNAMICALLY GENERATED - LIKLEY SHOWS 
-        THAT SHARE SAME DECADE OR GENRE, RETURNED BY A /SHOWS{ID}/ RELATED ENDPOINT
-        REPEATED COMPONENT: ONE <a class="related-item"> PER RELATED SHOW -->
-
-    <div class="related-items">
-        <p class="eyebrow">YOU MIGHT ALSO LIKE</p>
-        <div class="related-items-row">
-            <a href="#" class="related-item">
-                <div class="related-item-image">
-                    <img src="assets/images/name-that-tune.jpg"
-                    alt="Name That Tune">
-                </div>
-           <p class="related-item-title">Name That Tune</p>
-                            <p class="related-item-year">1957</p>
-                        </a>
-                        <a href="#" class="related-item">
-                            <div class="related-item-image">
-                                <img src="assets/images/pick-a-box.jpg" alt="Pick a Box">
-                            </div>
-                            <p class="related-item-title">Pick a Box</p>
-                            <p class="related-item-year">1957</p>
-                        </a>
-                        <a href="#" class="related-item">
-                            <div class="related-item-image">
-                                <img src="assets/images/ask-me-another.jpg" alt="Ask Me Another">
-                            </div>
-                            <p class="related-item-title">Ask Me Another</p>
-                            <p class="related-item-year">1953</p>
-                        </a>
-                    </div>
-                </div>
-            </div>
- 
+       <button class="surprise-button" id="surprise-button" type="button">Surprise me ↗</button>
         </div>
- 
-    </aside>
+      </div>
 
-    <script src="assets/js/script.js"></script>
+      <div class="archive-search">
+        <label class="archive-search-label" for="show-search">SEARCH</label>
+        <div class="archive-search-field">
+          <input id="show-search" type="search" placeholder="Search game shows..." autocomplete="off">
+          <span class="archive-search-icon" aria-hidden="true">/</span>
+          <button type="button" class="search-clear" id="search-clear" aria-label="Clear search" hidden>×</button>
+        </div>
+      </div>
 
+      <div class="decade-heading">
+        <h2 id="decade-title">GAME SHOWS OF THE 1950s</h2>
+        <p class="decade-description" id="decade-description">
+          The beginning of Australian television and the first generation of local game and quiz shows.
+        </p>
+      </div>
+
+      <div id="objectsContainer" class="show-grid" aria-live="polite" aria-busy="false"></div>
+    </section>
+
+    <section id="about" class="about-section" aria-labelledby="about-title">
+      <div class="about-text">
+        <p class="eyebrow">ABOUT PLAY BACK</p>
+        <h2 id="about-title">Australian Game shows<br>through the archive.</h2>
+        <p>
+          PLAY BACK invites you to journey through the National Film and Sound
+          Archive’s collection of iconic Australian game shows by decade.
+          Wander through the decades, press play, and discover the games that
+          had Australia watching.
+          <br><br>
+          This project was produced by students in the Faculty of Arts &amp;
+          Design from the University of Canberra, 2026.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>PLAY BACK</p>
+    <p>NFSA</p>
+  </footer>
+
+  <!-- Record details overlay: IDs and classes must match script.js and styles.css -->
+  <aside id="recordOverlay" class="record-overlay" aria-label="Archival show details" aria-hidden="true">
+    <div class="record-overlay-content">
+      <button class="record-close" type="button" aria-label="Close show details">×</button>
+      <div id="recordMedia" class="record-media"></div>
+      <div class="record-details">
+        <p id="recordYear" class="record-year"></p>
+        <h2 id="recordTitle" class="record-title">SHOW TITLE</h2>
+        <p id="recordDescription" class="record-description">Show description will appear here.</p>
+        <div class="record-meta">
+          <p><strong>GENRE</strong><span id="recordGenre">Game show</span></p>
+          <p><strong>MEDIUM</strong><span id="recordMedium">Television</span></p>
+          <p><strong>NFSA ID</strong><span id="recordId"></span></p>
+        </div>
+        <a id="recordLink" class="nfsa-link" href="#" target="_blank" rel="noopener noreferrer" hidden>View this record on NFSA ↗</a>
+      </div>
+    </div>
+  </aside>
+
+  <script src="assets/js/script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
-
-
-
-<!--STATE: EMPTY - SHOWN WHEN GENRE/DECADE FILTERS
-COMBINATION RETURNS ZER RESULTS FROM THE API. 
-REPLACES SHOW-GRIDCONTENT ENTIRELY.
-
-
